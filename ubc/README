@@ -1,0 +1,40 @@
+Undefined behavior C
+====================
+
+Setup
+-----
+
+Install the pre commit hook.
+
+    ln -s "$PWD/pre-commit" .git/hooks/pre-commit
+
+Install pytest and dot (for visualizing the CFG)
+
+Run the tests:
+
+    pytest
+
+Type verification:
+
+    mypy --strict .
+
+Code formatting:
+
+    find -name '*.py' | xargs autopep8 -i
+
+Usage
+-----
+
+To convert C to graph lang
+
+    env TV_ROOT=... L4V_ARCH=RISCV64 bash make-graph-from-c.sh <in.c> <out.txt>
+
+To use ubc:
+
+    usage: python3 main.py [options] <graphfile.txt> function-names...
+
+      --show-graph: Show the graph lang
+      --show-dsa: Show the graph after having applied dynamic single assignment
+      --show-ap: Show the assume prove prog
+      --show-smt: Show the SMT given to the solvers
+      --show-sats: Show the raw results from the smt solvers (sat/unsat)
